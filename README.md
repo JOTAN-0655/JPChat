@@ -13,3 +13,9 @@ https://script.google.com/macros/s/<some random characters>/exec?text=
 
 ## Useful links
 https://qiita.com/satto_sann/items/be4177360a0bc3691fdf
+
+# License
+Since I have used code from here https://github.com/ucchyocean/LunaChat
+I have to specify license.
+Which is `LGPLv3`
+http://sourceforge.jp/magazine/07/09/05/017211

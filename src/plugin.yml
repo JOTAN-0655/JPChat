@@ -1,0 +1,24 @@
+api-version: 1.18
+name: JPPlugin
+main: jotan.jpchat.JPChat
+version: 1.0.0
+load: POSTWORLD
+softdepend: [DISCORDplugin]
+author: JOTAN
+commands: 
+   jpchat:
+      description: Command of JPChat
+      usage: /jpchat [P1] [P2]
+permissions:
+  jpchat.*:
+    description: Allow all commands.
+    children:
+      jpchat.mention: true
+      jpchat.command.dictionary: true
+    default: op
+  jpchat.mention:
+    description: Allow Discord mention.
+    default: false
+  jpchat.command.dictionary:
+    description: Allow to access dictionary command.
+    default: op

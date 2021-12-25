@@ -12,7 +12,7 @@ https://script.google.com/macros/s/<some random characters>/exec?text=
 ```
 
 ## Useful links
-https://qiita.com/satto_sann/items/be4177360a0bc3691fdf
+https://qiita.com/tanabee/items/c79c5c28ba0537112922
 
 # License
 Since I have used code from here https://github.com/ucchyocean/LunaChat

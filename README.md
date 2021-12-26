@@ -8,7 +8,7 @@ You have to specify the GAS execute url in config.yml<br>
 ## URL
 URL should be like this.
 ```
-https://script.google.com/macros/s/<some random characters>/exec?text=
+https://script.google.com/macros/s/<some random characters>/exec
 ```
 
 ## Useful links

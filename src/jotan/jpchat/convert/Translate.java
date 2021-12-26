@@ -26,6 +26,7 @@ public class Translate {
 
 	public static enum Locale_ID_Name{
 		Japanese("ja"),
+		Japanese_Roman("ja"),
 		English("en"),
 		Russian("ru"),
 		Chinese("zh_cn"),

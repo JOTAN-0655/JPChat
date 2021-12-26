@@ -103,27 +103,30 @@ public class JPChat extends JavaPlugin implements Listener{
 
 
 		JPChat_Player_Data jppd = Player_Data_Manager.get_Player_Data(p);
-		if(jppd.getTalk_language().equals(Locale_ID_Name.Japanese) && jppd.getTranslate_language().equals(Locale_ID_Name.Japanese)) {
+
+
+		if(jppd.getTalk_language().equals(Locale_ID_Name.Japanese_Roman) && jppd.getTranslate_language().equals(Locale_ID_Name.Japanese)) {
+
 			SendMessage.send_Message(p, romaji_result, content);
+			return;
+		}
+
+		if(jppd.getTalk_language().equals(Locale_ID_Name.Japanese_Roman))
+			content = romaji_result;
+
+
+
+		if(jppd.getTalk_language().getString().equals(jppd.getTranslate_language().getString())) {
+			SendMessage.send_Message(p, content, null);
 		}else {
-			String translate_text = content;
-			if(jppd.getTalk_language().equals(Locale_ID_Name.Japanese)) {
-				translate_text = romaji_result;
+			try {
+				String translate_result = Translate.translate(content, jppd.getTranslate_language(), jppd.getTalk_language());
+				SendMessage.send_Message(p, translate_result, content);
+			} catch (IOException e1) {
+				// TODO 自動生成された catch ブロック
+				e1.printStackTrace();
+				SendMessage.send_Message(p, content, "ERROR OCCURRED AT TRANSLATE");
 			}
-
-			if(jppd.getTalk_language().equals(jppd.getTranslate_language())) {
-				SendMessage.send_Message(p, content, null);
-			}else {
-				try {
-					String translate_result = Translate.translate(translate_text, jppd.getTranslate_language(), jppd.getTalk_language());
-					SendMessage.send_Message(p, translate_result, content);
-				} catch (IOException e1) {
-					// TODO 自動生成された catch ブロック
-					e1.printStackTrace();
-					SendMessage.send_Message(p, translate_text, "ERROR OCCURRED AT TRANSLATE");
-				}
-			}
-
 		}
 	}
 

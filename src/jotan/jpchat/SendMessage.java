@@ -24,6 +24,15 @@ public class SendMessage {
 		Minecraft
 	}
 
+	public static String remove_colorcode(String format) {
+		while(true) {
+			int at = format.indexOf('§');
+			if(at == -1) break;
+			format = format.substring(0, at) + format.substring(at+2);
+		}
+		return format;
+	}
+
 	public static String get_Message(Player p,String message,String original,Chat_Group cg, Where_Send ws) {
 		World wo = p.getWorld();
 		JPChat_Player_Data jppd = Player_Data_Manager.get_Player_Data(p);
@@ -76,11 +85,7 @@ public class SendMessage {
 		if(ws.equals(Where_Send.Minecraft)) {
 			format = ChatColor.translateAlternateColorCodes('&', format);
 		}else {
-			while(true) {
-				int at = format.indexOf('§');
-				if(at == -1) break;
-				format = format.substring(0, at) + format.substring(at+2);
-			}
+			format = remove_colorcode(format);
 		}
 
 		return format;
@@ -117,9 +122,10 @@ public class SendMessage {
 		Chat_Group cg = Group_Manager.get_Group(p);
 		String data = get_Message(p,message,original,cg,Where_Send.Minecraft);
 
-		//String log = p.getName() + "," + p.getWorld().getName() + "," + message + "," + original;
-		//if(cg != null) log += "," + cg.getGroup_name();
-		JPChat.getInstance().getLogger().info(data);
+		String log = p.getName() + "," + p.getWorld().getName() + "," + message + "," + original;
+		if(cg != null) log += "," + cg.getGroup_name();
+		JPChat.getInstance().getLogger().info(log);
+		JPChat.getInstance().getLogger().info(remove_colorcode(data));
 
 		if(cg == null) {
 			send_to_Discord(message,original,p);

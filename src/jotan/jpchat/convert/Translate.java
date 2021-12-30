@@ -12,7 +12,7 @@ public class Translate {
 
 	public static String translate(String message,Locale_ID_Name to,Locale_ID_Name from) throws IOException {
 		String url = JPChat.getInstance().getConfig().getString("Google_Translate_URL")
-				+ message + "&source=" + from.getString() + "&target=" + to.getString();
+				+ "?text=" + message + "&source=" + from.getString() + "&target=" + to.getString();
 		JPChat.getInstance().getLogger().fine(url);
 		Document document = Jsoup.connect(url).get();
 		Elements pres = document.select("body");

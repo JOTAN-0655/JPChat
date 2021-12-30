@@ -3,7 +3,7 @@ name: JPPlugin
 main: jotan.jpchat.JPChat
 version: 1.0.0
 load: POSTWORLD
-softdepend: [DISCORDplugin]
+softdepend: [DISCORDplugin,LuckPerms]
 author: JOTAN
 commands: 
    jpchat:

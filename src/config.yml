@@ -1,1 +1,20 @@
 Google_Translate_URL : "https://aaaaa"
+Login_Message : true
+Logout_Message : true
+
+#Message Setting
+# You can use color code like &b
+
+
+# You can use follow replaces
+# [prefix] - shows luckperms prefix.
+# [suffix] - shows luckperms suffix.
+# [message] - shows message. Almost everyone needs this.
+# [original_message] - shows message which is before converted by JPPlugin.
+# [world] - shows world name where player is.
+# [name] - shows players name.
+# [chat_group] - shows what chat group does player in
+Minecraft_Message_Style : "&f[[prefix]][name][[suffix]] &8» &f[message][original_message]"
+
+# For discord, you can't use color code. Others are same
+Discord_Message_Style   : "[[prefix]][name][[suffix]] » [message][original_message]"

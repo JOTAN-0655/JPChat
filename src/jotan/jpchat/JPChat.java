@@ -45,6 +45,8 @@ public class JPChat extends JavaPlugin implements Listener{
 		plugin.saveDefaultConfig();
 		load_System();
 		load_config();
+
+
 	}
 
 	public void load_System() {
@@ -134,18 +136,27 @@ public class JPChat extends JavaPlugin implements Listener{
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
 		JPChat_Player_Data jppd = Player_Data_Manager.get_Player_Data(p);
-		if(!p.hasPlayedBefore()) {
-			Bukkit.broadcastMessage(ChatColor.BOLD + "" + ChatColor.GOLD + "お初さんが参加しました！");
+
+		if(getConfig().getBoolean("Login_Message")) {
+			if(!p.hasPlayedBefore()) {
+				Bukkit.broadcastMessage(ChatColor.BOLD + "" + ChatColor.GOLD + "お初さんが参加しました！");
+			}
+			String name = jppd.getNick_name();
+			e.setJoinMessage(jppd.getColor() + name + "が参加しました。");
 		}
-		String name = jppd.getNick_name();
-		e.setJoinMessage(jppd.getColor() + name + "が参加しました。");
+
+
 	}
 
 	@EventHandler
 	public void onQuit(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
 		JPChat_Player_Data jppd = Player_Data_Manager.get_Player_Data(p);
-		e.setQuitMessage(jppd.getColor() + jppd.getNick_name() + "が退出しました。");
+
+		if(getConfig().getBoolean("Logout_Message")) {
+			e.setQuitMessage(jppd.getColor() + jppd.getNick_name() + "が退出しました。");
+		}
+
 
 		Chat_Group cg = Group_Manager.get_Group(p);
 		if(cg != null) {

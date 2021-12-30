@@ -33,6 +33,42 @@ public class SendMessage {
 		return format;
 	}
 
+	public static String replacement(String original,String type,String replace_to) {
+		try {
+			int index = original.indexOf(type);
+			if(index == -1) return original;
+
+
+
+			String kakko = original.substring(index + type.length(), index + type.length() + 2);
+			if(JPChat.getInstance().getConfig().getBoolean("Remove_Parentheses_when_NULL")) {
+				if(replace_to == null) {
+					if(kakko.equals("-a") || kakko.equals("-b") || kakko.equals("-c")) {
+						type += kakko;
+					}
+					original = original.replace(type, "");
+					return original;
+				}
+			}
+
+			replace_to = String.valueOf(replace_to);
+
+			if(kakko.equals("-a")) {
+				original = original.replace(type+"-a", "(" + replace_to + ")");
+			}else if(kakko.equals("-b")) {
+				original = original.replace(type+"-b", "[" + replace_to + "]");
+			}else if(kakko.equals("-c")) {
+				original = original.replace(type+"-c", "{" + replace_to + "}");
+			}else {
+				original = original.replace(type, replace_to);
+			}
+		}catch(Exception e) {
+			replace_to = String.valueOf(replace_to);
+			original = original.replace(type, replace_to);
+		}
+		return original;
+	}
+
 	public static String get_Message(Player p,String message,String original,Chat_Group cg, Where_Send ws) {
 		World wo = p.getWorld();
 		JPChat_Player_Data jppd = Player_Data_Manager.get_Player_Data(p);
@@ -74,13 +110,13 @@ public class SendMessage {
 		else
 			format = JPChat.getInstance().getConfig().getString("Discord_Message_Style");
 
-		format = format.replace("[prefix]", prefix);
-		format = format.replace("[suffix]", suffix);
-		format = format.replace("[message]", message);
-		format = format.replace("[original_message]", original);
-		format = format.replace("[world]", world_name);
-		format = format.replace("[name]", user_name);
-		format = format.replace("[chat_group]", chat_group_prefix);
+		format = replacement(format,"@prefix", prefix);
+		format = replacement(format,"@suffix", suffix);
+		format = replacement(format,"@message", message);
+		format = replacement(format,"@original_message", original);
+		format = replacement(format,"@world", world_name);
+		format = replacement(format,"@name", user_name);
+		format = replacement(format,"@chat_group", chat_group_prefix);
 
 		if(ws.equals(Where_Send.Minecraft)) {
 			format = ChatColor.translateAlternateColorCodes('&', format);

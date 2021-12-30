@@ -7,14 +7,23 @@ Logout_Message : true
 
 
 # You can use follow replaces
-# [prefix] - shows luckperms prefix.
-# [suffix] - shows luckperms suffix.
-# [message] - shows message. Almost everyone needs this.
-# [original_message] - shows message which is before converted by JPPlugin.
-# [world] - shows world name where player is.
-# [name] - shows players name.
-# [chat_group] - shows what chat group does player in
-Minecraft_Message_Style : "&f[[prefix]][name][[suffix]] &8» &f[message][original_message]"
+# @prefix - shows luckperms prefix.
+# @suffix - shows luckperms suffix.
+# @message - shows message. Almost everyone needs this.
+# @original_message - shows message which is before converted by JPPlugin.
+# @world - shows world name where player is.
+# @name - shows players name.
+# @chat_group - shows what chat group does player in
+
+# If you put -a to any replaces, you can have ( )
+# If you put -b to any replaces, you can have [ ]
+# If you put -c to any replaces, you can have { }
+# Ex.
+# @prefix-a => (prefix)
+
+Minecraft_Message_Style : "&f@prefix-b@name@suffix-b &7» &f@message&7@original_message-a"
 
 # For discord, you can't use color code. Others are same
-Discord_Message_Style   : "[[prefix]][name][[suffix]] » [message][original_message]"
+Discord_Message_Style   : "@prefix-b@name@suffix-b » @message@original_message-a"
+
+Remove_Parentheses_when_NULL : true
